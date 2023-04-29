@@ -48,7 +48,7 @@ Future<List<DailyChallenge>> getChallenges() async {
   }
 }
 
-Future<bool> completeChallenge(String id) async {
+Future<User> completeChallenge(String id) async {
   String body = jsonEncode({'id': id});
 
   http.Response response = await http.post(
@@ -59,8 +59,13 @@ Future<bool> completeChallenge(String id) async {
   final json = jsonDecode(response.body);
 
   if (response.statusCode != 200) {
+    Fluttertoast.showToast(
+      msg: json['message'],
+      backgroundColor: const Color.fromARGB(255, 238, 37, 37),
+    );
     throw Exception(json['message']);
   } else {
-    return true;
+    return User.fromJson(jsonDecode(response.body));
+    ;
   }
 }

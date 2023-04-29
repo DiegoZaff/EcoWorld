@@ -35,7 +35,7 @@ class User {
 Future<User> registerUser(String username, String password) async {
   String body = jsonEncode({'username': username, 'password': password});
 
-  http.Response response = await http.post(Uri.http(baseUrl, '/register'),
+  http.Response response = await http.post(Uri.http(baseUrl, '/auth/register'),
       body: body, headers: {'Content-Type': 'application/json'});
 
   Map<String, dynamic> json = jsonDecode(response.body);
@@ -54,7 +54,7 @@ Future<User> registerUser(String username, String password) async {
 Future<User> logInUser(String username, String password) async {
   String body = jsonEncode({'username': username, 'password': password});
 
-  http.Response response = await http.post(Uri.http(baseUrl, '/login'),
+  http.Response response = await http.post(Uri.http(baseUrl, '/auth/login'),
       body: body, headers: {'Content-Type': 'application/json'});
 
   Map<String, dynamic> json = jsonDecode(response.body);
