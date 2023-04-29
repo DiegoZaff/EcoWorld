@@ -67,7 +67,7 @@ class MainApp extends StatelessWidget {
       routerConfig: _router,
       theme: ThemeData(
           iconTheme: const IconThemeData(color: Colors.white, size: 30),
-          fontFamily: GoogleFonts.montserrat().fontFamily,
+          fontFamily: GoogleFonts.nunito().fontFamily,
           primarySwatch: Colors.blue,
           primaryColor: const Color(0xFF005C4C),
           scaffoldBackgroundColor: Colors.grey[100],
