@@ -1,4 +1,3 @@
-import 'package:eco_app/api/challenge.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 

@@ -47,3 +47,20 @@ Future<List<DailyChallenge>> getChallenges() async {
     return json.map((e) => DailyChallenge.fromJson(e)).toList();
   }
 }
+
+Future<bool> completeChallenge(String id) async {
+  String body = jsonEncode({'id': id});
+
+  http.Response response = await http.post(
+      Uri.http(baseUrl, '/game/complete_challenge'),
+      body: body,
+      headers: {'Content-Type': 'application/json'});
+
+  final json = jsonDecode(response.body);
+
+  if (response.statusCode != 200) {
+    throw Exception(json['message']);
+  } else {
+    return true;
+  }
+}
