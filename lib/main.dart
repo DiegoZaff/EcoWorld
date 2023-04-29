@@ -15,12 +15,13 @@ final GoRouter _router = GoRouter(
         return const HomePage();
       },
     ),
-    /* GoRoute(
+    /*GoRoute(
       path: '/menu',
       builder: (BuildContext context, GoRouterState state) {
         return const Menu();
       },
-    ), */
+    ), 
+    */
   ],
 );
 
@@ -29,11 +30,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp.router(
+      routerConfig: _router,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
     );
   }
