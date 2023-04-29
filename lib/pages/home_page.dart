@@ -5,6 +5,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(32),
+          child: Container(
+            height: 150,
+            color: Colors.red,
+          ),
+        ),
+        //Sara inizia qui
+      ],
+    );
   }
 }
