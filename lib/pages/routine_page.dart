@@ -5,6 +5,7 @@ import 'package:eco_app/components/domande_routine.dart';
 import 'package:eco_app/components/title_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../api/footprint.dart';
 
@@ -60,10 +61,15 @@ class _RoutineState extends State<Routine> {
     punti = punteggio;
     final state = context.read<LoginBloc>().state;
     if (state is LoggedIn) {
-      await sendCarbonFootprint(
-              punteggio.toInt(), state.user.username, state.user.password)
-          .then((newUser) =>
-              context.read<LoginBloc>().add(UpdateLogin(user: newUser)));
+      try {
+        await sendCarbonFootprint(
+                punteggio.toInt(), state.user.username, state.user.password)
+            .then((newUser) =>
+                context.read<LoginBloc>().add(UpdateLogin(user: newUser)))
+            .then((value) => context.pop());
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
@@ -79,48 +85,46 @@ class _RoutineState extends State<Routine> {
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-          child: Expanded(
-            child: Column(
-              children: [
-                const TitlePage(title: 'ROUTINE'),
-                Container(
-                  height: 600,
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: ListView.builder(
-                      itemCount: domande.length,
-                      itemBuilder: (contex, i) {
-                        return DomandeRoutine(
-                            question: domande[i], onChanged: onChanged);
-                      }),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                        onLongPress: punteggio,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20, bottom: 20),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Text(
-                                'FINISH',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w700),
-                              ),
+          child: Column(
+            children: [
+              const TitlePage(title: 'ROUTINE'),
+              Container(
+                height: 550,
+                padding: const EdgeInsets.only(bottom: 25),
+                child: ListView.builder(
+                    itemCount: domande.length,
+                    itemBuilder: (contex, i) {
+                      return DomandeRoutine(
+                          question: domande[i], onChanged: onChanged);
+                    }),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                      onTap: punteggio,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'FINISH',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
-                        ))
-                  ],
-                )
-              ],
-            ),
+                        ),
+                      ))
+                ],
+              )
+            ],
           ),
         ),
       ),
