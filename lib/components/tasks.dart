@@ -6,12 +6,14 @@ class Tasks extends StatelessWidget {
       {super.key,
       required this.title,
       required this.points,
-      this.onPressed}); //da mettere il tempo
+      this.onPressed,
+      this.isCompleted}); //da mettere il tempo
 
   final String title;
 
   final int points;
   final void Function()? onPressed;
+  final bool? isCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,13 @@ class Tasks extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 24),
                     child: Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w500,
+                          decoration: isCompleted == true
+                              ? TextDecoration.lineThrough
+                              : null),
                     )),
                 const Spacer(),
                 Container(

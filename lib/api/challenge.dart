@@ -10,13 +10,14 @@ class DailyChallenge {
   final String title;
   final String description;
   final int points;
+  bool? isCompleted;
 
-  DailyChallenge({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.points,
-  });
+  DailyChallenge(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.points,
+      this.isCompleted});
 
   factory DailyChallenge.fromJson(Map<String, dynamic> json) {
     return DailyChallenge(
@@ -48,13 +49,16 @@ Future<List<DailyChallenge>> getChallenges() async {
   }
 }
 
-Future<User> completeChallenge(String id) async {
-  String body = jsonEncode({'id': id});
+Future<User> completeChallenge(String id, String authstring) async {
+  String body = jsonEncode({'challengeId': id});
 
   http.Response response = await http.post(
       Uri.http(baseUrl, '/game/complete_challenge'),
       body: body,
-      headers: {'Content-Type': 'application/json'});
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authstring
+      });
 
   final json = jsonDecode(response.body);
 
@@ -66,6 +70,5 @@ Future<User> completeChallenge(String id) async {
     throw Exception(json['message']);
   } else {
     return User.fromJson(jsonDecode(response.body));
-    ;
   }
 }

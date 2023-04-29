@@ -8,11 +8,13 @@ class HomePageTile extends StatelessWidget {
       {super.key,
       this.onPress,
       required this.title,
-      this.icon = Ionicons.sunny});
+      this.icon = Ionicons.sunny,
+      this.isCompleted});
 
   final VoidCallback? onPress;
   final String title;
   final IoniconsData icon;
+  final bool? isCompleted;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,7 +40,7 @@ class HomePageTile extends StatelessWidget {
                   icon,
                   color: const Color.fromARGB(255, 0, 191, 57),
                 ),
-                Tasks(title: title, points: 10),
+                Tasks(title: title, points: 10, isCompleted: isCompleted),
               ],
             ),
           ),

@@ -45,18 +45,17 @@ class Leaderboard extends HookWidget {
                 context.pop();
               }
             },
-            child: Expanded(
-                child: (leaderboard.value != null)
-                    ? ListView.builder(
-                        itemBuilder: (context, i) {
-                          return LeaderboardTile(
-                            user: leaderboard.value![i],
-                          );
-                        },
-                        itemCount: leaderboard.value!.length,
-                      )
-                    : const Center(
-                        child: CircularProgressIndicator.adaptive())),
+            child: (leaderboard.value != null)
+                ? ListView.builder(
+                    itemBuilder: (context, i) {
+                      return LeaderboardTile(
+                        user: leaderboard.value![i],
+                      );
+                    },
+                    itemCount: leaderboard.value!.length,
+                  )
+                : const Center(
+                    child: CircularProgressIndicator.adaptive()),
           ),
         ),
       ),
