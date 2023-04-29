@@ -24,7 +24,7 @@ class Leaderboard extends HookWidget {
         username = state.user.username;
         password = state.user.password;
       }
-      fetchLeaderboard('Basic: $username:$password')
+      fetchLeaderboard('Basic $username:$password')
           .then((value) => leaderboard.value = value);
       return null;
     }, [state]);
