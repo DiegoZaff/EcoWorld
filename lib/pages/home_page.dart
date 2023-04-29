@@ -104,9 +104,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const UserInfo(),
-              const HomePageTile(
-                title: "Quizzettone",
+              HomePageTile(
+                title: "Quiz",
                 icon: Ionicons.help_circle,
+                onPress: () => {context.push('/quiz')},
               ),
               HomePageTile(
                 title: "Daily Footprint",
