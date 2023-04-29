@@ -7,8 +7,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../api/user.dart';
-
 class Login extends HookWidget {
   const Login({super.key});
   @override
