@@ -4,7 +4,6 @@ import 'package:eco_app/pages/leaderboards.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'pages/quiz_page.dart';
 import 'pages/routine_page.dart';
 
