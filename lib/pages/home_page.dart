@@ -1,6 +1,7 @@
 import 'package:eco_app/components/user_info.dart';
 import 'package:eco_app/components/tasks.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -59,12 +60,12 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(
-                    children: const [
-                      Icon(
+                    children: [
+                      const Icon(
                         Icons.face,
                         color: Colors.blue,
                       ),
-                      Tasks(title: 'Daily Footprint', points: 5),
+                      Tasks(title: 'Daily Footprint', points: 5, onPressed: (){context.push('/routine');},)
                     ],
                   ),
                 ),
