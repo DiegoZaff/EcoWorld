@@ -24,3 +24,5 @@ flutter:
   assets:
     - assets/icons/quiz.svg
     - assets/icons/dailyfootprint.svg
+    - assets/images/earth.png
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'personal_score.dart';
 
@@ -14,12 +15,13 @@ class UserInfo extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 64, 16, 0),
       child: Container(
         padding: const EdgeInsets.all(16),
-        height: 150,
+        height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Theme.of(context).primaryColor,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
@@ -42,7 +44,33 @@ class UserInfo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16),
               child: Row(
-                children: [Icon(Icons.abc)],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context.go("/myworld");
+                    },
+                    child: Row(children: [
+                      Image.asset("assets/images/earth.png"),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text("MyWorld",
+                            style: TextStyle(color: Colors.white)),
+                      )
+                    ]),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        context.go("/classifica");
+                      },
+                      child: const Text(
+                        "Leaderboard",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ))
+                ],
               ),
             )
           ],
