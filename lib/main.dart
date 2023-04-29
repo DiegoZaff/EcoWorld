@@ -1,4 +1,7 @@
+import 'package:eco_app/classes/user_leaderboard.dart';
+import 'package:eco_app/components/leaderboards/leaderboard_tile.dart';
 import 'package:eco_app/pages/home_page.dart';
+import 'package:eco_app/pages/leaderboards.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,10 +11,10 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: <RouteBase>[
     GoRoute(
-      path: '/home',
+      path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const HomePage();
       },
@@ -22,13 +25,23 @@ final GoRouter _router = GoRouter(
         return const HomePage();
       },
     ),
-    /* GoRoute(
-      path: '/menu',
+    GoRoute(
+      path: '/leaderboards',
       builder: (BuildContext context, GoRouterState state) {
-        return const Menu();
+        return Leaderboard(
+          globalLeaderboard: [
+            UserLeaderboard(name: "Maria", points: 12414),
+            UserLeaderboard(name: "Giovanni", points: 420),
+            UserLeaderboard(name: "Diego", points: 157, isYou: true)
+          ],
+          teamLeaderboard: [
+            UserLeaderboard(name: "Giorgia", points: 1),
+            UserLeaderboard(name: "Claudio", points: 125),
+            UserLeaderboard(name: "Cesare", points: 1235)
+          ],
+        );
       },
-    ), 
-    */
+    ),
   ],
 );
 
