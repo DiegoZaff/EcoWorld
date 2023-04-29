@@ -53,11 +53,13 @@ class UserInfo extends StatelessWidget {
                       );
                     } else {
                       return Button(
-                          text: "Login",
-                          onPressed: () {
-                            context.push('/login');
-                          },
-                          shrinkWrap: true);
+                        text: "Login",
+                        onPressed: () {
+                          context.push('/login');
+                        },
+                        shrinkWrap: true,
+                        margin: const EdgeInsets.all(0),
+                      );
                     }
                   },
                 ),

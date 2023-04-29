@@ -12,16 +12,16 @@ class Button extends StatelessWidget {
   final String text;
   final Function onPressed;
   final bool? shrinkWrap;
-
+  final EdgeInsetsGeometry? margin;
   late Color color;
 
-  Button({
-    super.key,
-    this.type = ButtonType.primary,
-    required this.text,
-    required this.onPressed,
-    this.shrinkWrap,
-  }) {
+  Button(
+      {super.key,
+      this.type = ButtonType.primary,
+      required this.text,
+      required this.onPressed,
+      this.shrinkWrap,
+      this.margin}) {
     switch (type) {
       case ButtonType.primary:
         color = const Color.fromARGB(255, 0, 191, 57);
@@ -44,7 +44,7 @@ class Button extends StatelessWidget {
     return SizedBox(
       width: shrinkWrap == true ? null : double.infinity,
       child: Container(
-          margin: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+          margin: margin ?? const EdgeInsets.fromLTRB(24, 8, 24, 8),
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
           decoration: BoxDecoration(
