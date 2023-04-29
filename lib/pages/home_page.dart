@@ -1,7 +1,10 @@
 import 'dart:ui';
+import 'package:eco_app/blocs/login/login_bloc.dart';
 import 'package:eco_app/components/home_page_tile.dart';
 import 'package:eco_app/components/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -30,6 +33,16 @@ class _HomePageState extends State<HomePage> {
     final newChallenges = await getChallenges();
     setState(() {
       challenges = newChallenges;
+    });
+  }
+
+  void updateChallengesStatus(String id) async {
+    setState(() {
+      for (int i = 0; i < challenges.length; i++) {
+        if (challenges[i].id == id) {
+          challenges[i].isCompleted = true;
+        }
+      }
     });
   }
 
@@ -71,10 +84,32 @@ class _HomePageState extends State<HomePage> {
                           horizontal: 16, vertical: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
+                        children: [
                           IconButton(
-                              onPressed: null,
-                              icon: Icon(
+                              onPressed: () async {
+                                final state = context.read<LoginBloc>().state;
+                                if (state is LoggedIn) {
+                                  try {
+                                    await completeChallenge(challenge.id,
+                                            'Basic ${state.user.username}:${state.user.password}')
+                                        .then((newUser) => context
+                                            .read<LoginBloc>()
+                                            .add(UpdateLogin(user: newUser)))
+                                        .then((value) => context.pop())
+                                        .then((value) => updateChallengesStatus(
+                                            challenge.id));
+                                  } catch (e) {
+                                    //do nothing
+                                  }
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg: "You need to login first",
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 238, 37, 37),
+                                  );
+                                }
+                              },
+                              icon: const Icon(
                                 Icons.check_circle,
                                 color: Colors.green,
                               )),
@@ -119,6 +154,7 @@ class _HomePageState extends State<HomePage> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return HomePageTile(
+                    isCompleted: challenges[index].isCompleted,
                     title: "Daily Challenge",
                     onPress: () => _showModal(context, challenges[index]),
                   );
