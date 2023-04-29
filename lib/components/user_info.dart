@@ -53,8 +53,8 @@ class UserInfo extends StatelessWidget {
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white)),
                             const Spacer(),
-                            const PersonalScore(
-                              score: 100,
+                             PersonalScore(
+                              score: state.user.score,
                             )
                           ],
                         ),

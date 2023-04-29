@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:eco_app/components/home_page_tile.dart';
 import 'package:eco_app/components/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../api/challenge.dart';
@@ -57,7 +58,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 16),
                       child: Text(
                         challenge.description,
                         style:
@@ -106,9 +108,10 @@ class _HomePageState extends State<HomePage> {
                 title: "Quizzettone",
                 icon: Ionicons.help_circle,
               ),
-              const HomePageTile(
+              HomePageTile(
                 title: "Daily Footprint",
                 icon: Ionicons.footsteps,
+                onPress: () => {context.push('/routine')},
               ),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Routine extends StatefulWidget {
-  const Routine({super.key});
+class Quiz extends StatefulWidget {
+  const Quiz({super.key});
 
   @override
-  State<Routine> createState() => _RoutineState();
+  State<Quiz> createState() => _QuizState();
 }
 
-class _RoutineState extends State<Routine> {
+class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     return Container();
