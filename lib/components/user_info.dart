@@ -61,7 +61,7 @@ class UserInfo extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        context.go("/classifica");
+                        context.push("/leaderboards");
                       },
                       child: const Text(
                         "Leaderboard",
