@@ -25,6 +25,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/quiz.svg
-    - assets/icons/dailyfootprint.svg
     - assets/images/earth.png
+    - assets/icons/tree1.svg
+    - assets/icons/tree2.svg
+    - assets/icons/tree3.svg
+    - assets/images/sfondofoglie.png
