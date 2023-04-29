@@ -1,24 +1,57 @@
+import 'package:eco_app/blocs/login/login_bloc.dart';
+import 'package:eco_app/classes/user_leaderboard.dart';
 import 'package:eco_app/pages/home_page.dart';
+import 'package:eco_app/pages/leaderboards.dart';
+import 'package:eco_app/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'pages/quiz_page.dart';
 import 'pages/routine_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => LoginBloc(),
+      ),
+    ],
+    child: const MainApp(),
+  ));
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: <RouteBase>[
     GoRoute(
-      path: '/home',
+      path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const HomePage();
       },
     ),
+    GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Login();
+      },
+    ),
+    GoRoute(
+        path: '/leaderboards',
+        builder: (BuildContext context, GoRouterState state) {
+          return Leaderboard(
+            globalLeaderboard: [
+              UserLeaderboard(name: "Maria", points: 12414),
+              UserLeaderboard(name: "Giovanni", points: 420),
+              UserLeaderboard(name: "Diego", points: 157, isYou: true)
+            ],
+            teamLeaderboard: [
+              UserLeaderboard(name: "Giorgia", points: 1),
+              UserLeaderboard(name: "Claudio", points: 125),
+              UserLeaderboard(name: "Cesare", points: 1235)
+            ],
+          );
+        }),
     GoRoute(
       path: '/quiz',
       builder: (BuildContext context, GoRouterState state) {
@@ -43,12 +76,11 @@ class MainApp extends StatelessWidget {
       routerConfig: _router,
       theme: ThemeData(
           iconTheme: const IconThemeData(color: Colors.white, size: 30),
-          fontFamily: GoogleFonts.montserrat().fontFamily,
+          fontFamily: GoogleFonts.nunito().fontFamily,
           primarySwatch: Colors.blue,
           primaryColor: const Color(0xFF005C4C),
           scaffoldBackgroundColor: Colors.grey[100],
           hoverColor: Colors.white.withOpacity(0.6),
-
           textTheme: const TextTheme(
             titleMedium: TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
