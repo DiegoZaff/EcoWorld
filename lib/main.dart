@@ -16,7 +16,13 @@ final GoRouter _router = GoRouter(
         return const HomePage();
       },
     ),
-    /*GoRoute(
+    GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomePage();
+      },
+    ),
+    /* GoRoute(
       path: '/menu',
       builder: (BuildContext context, GoRouterState state) {
         return const Menu();
