@@ -1,0 +1,81 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'personal_score.dart';
+
+class UserInfo extends StatelessWidget {
+  const UserInfo({super.key, required this.name, required this.surname});
+
+  final String name;
+  final String surname;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 64, 16, 0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        height: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Theme.of(context).primaryColor,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(
+                    Icons.person,
+                  ),
+                ),
+                Text(
+                  '$name\n$surname',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const Spacer(),
+                const PersonalScore(
+                  score: 100,
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context.go("/myworld");
+                    },
+                    child: Row(children: [
+                      Image.asset("assets/images/earth.png"),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text("MyWorld",
+                            style: TextStyle(color: Colors.white)),
+                      )
+                    ]),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        context.go("/classifica");
+                      },
+                      child: const Text(
+                        "Leaderboard",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ))
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
