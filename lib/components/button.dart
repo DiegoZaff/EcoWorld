@@ -11,6 +11,7 @@ class Button extends StatelessWidget {
   final ButtonType type;
   final String text;
   final Function onPressed;
+  final bool? shrinkWrap;
 
   late Color color;
 
@@ -19,6 +20,7 @@ class Button extends StatelessWidget {
     this.type = ButtonType.primary,
     required this.text,
     required this.onPressed,
+    this.shrinkWrap,
   }) {
     switch (type) {
       case ButtonType.primary:
@@ -40,7 +42,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: shrinkWrap == true ? null : double.infinity,
       child: Container(
           margin: const EdgeInsets.fromLTRB(24, 8, 24, 8),
           alignment: Alignment.center,

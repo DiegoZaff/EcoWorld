@@ -1,6 +1,9 @@
+import 'package:eco_app/components/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../blocs/login/login_bloc.dart';
 import 'personal_score.dart';
 
 class UserInfo extends StatelessWidget {
@@ -25,25 +28,39 @@ class UserInfo extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(
-                    Icons.person,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.push('/login');
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    if (state is LoggedIn) {
+                      return Expanded(
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(right: 16),
+                              child: Icon(
+                                Icons.person,
+                              ),
+                            ),
+                            Text(
+                              '$name\n$surname',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const Spacer(),
+                            const PersonalScore(
+                              score: 100,
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Button(
+                          text: "Login",
+                          onPressed: () {
+                            context.push('/login');
+                          },
+                          shrinkWrap: true);
+                    }
                   },
-                  child: Text(
-                    '$name\n$surname',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
                 ),
-                const Spacer(),
-                const PersonalScore(
-                  score: 100,
-                )
               ],
             ),
             Padding(

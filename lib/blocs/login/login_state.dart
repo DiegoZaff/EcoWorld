@@ -10,10 +10,10 @@ abstract class LoginState extends Equatable {
 class LoginInitial extends LoginState {}
 
 class LoggedIn extends LoginState {
-  final String username;
+  final User user;
 
-  const LoggedIn({required this.username});
+  const LoggedIn({required this.user});
 
   @override
-  List<Object> get props => [username];
+  List<Object> get props => [user];
 }
