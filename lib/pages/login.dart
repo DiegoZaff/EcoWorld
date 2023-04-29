@@ -67,17 +67,19 @@ class Login extends HookWidget {
                   ),
 
                   // "Login" button
-                  Button(
-                      text: 'login',
-                      onPressed: () {
-                        context.read<LoginBloc>().add(StartLogin(
-                            password: password.value,
-                            username: username.value));
-                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 32),
+                    child: Button(
+                        text: 'login',
+                        onPressed: () {
+                          context.read<LoginBloc>().add(StartLogin(
+                              password: password.value,
+                              username: username.value));
+                        }),
+                  ),
                   // "Register" button
                   Button(
                     text: 'register',
-                    type: ButtonType.secondary,
                     onPressed: () {
                       if (username.value.isNotEmpty &&
                           password.value.isNotEmpty) {
