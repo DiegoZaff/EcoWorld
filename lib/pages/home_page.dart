@@ -1,20 +1,26 @@
+import 'package:eco_app/components/user_info.dart';
 import 'package:eco_app/components/tasks.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String name = "Nome";
+  String surname = "Cognome";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: Container(
-              height: 150,
-              color: Colors.red,
-            ),
+          UserInfo(
+            name: name,
+            surname: surname,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
