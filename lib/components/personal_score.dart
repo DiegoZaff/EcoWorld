@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class PersonalScore extends StatelessWidget {
   const PersonalScore({super.key, required this.score});
@@ -9,7 +10,7 @@ class PersonalScore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.filter_vintage),
+        const Icon(Ionicons.flower_sharp),
         Padding(
           padding: const EdgeInsets.only(left: 16),
           child: Text(
