@@ -27,9 +27,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<FutureOr<void>> _onRegisterUser(
       RegisterUser event, Emitter<LoginState> emit) async {
-    final user = await registerUser(event.username, event.password);
-
-    emit(LoggedIn(user: user));
+    try {
+      final user = await registerUser(event.username, event.password);
+      emit(LoggedIn(user: user));
+    } catch (e) {
+      emit(LoginInitial());
+    }
   }
 
   FutureOr<void> _onStartLogout(StartLogout event, Emitter<LoginState> emit) {}

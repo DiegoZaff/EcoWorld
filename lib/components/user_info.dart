@@ -10,10 +10,7 @@ import 'personal_score.dart';
 class UserInfo extends StatelessWidget {
   const UserInfo({
     super.key,
-    required this.name,
   });
-
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +47,7 @@ class UserInfo extends StatelessWidget {
                                 Ionicons.person_circle,
                               ),
                             ),
-                            Text(name,
+                            Text(state.user.username,
                                 style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w900,

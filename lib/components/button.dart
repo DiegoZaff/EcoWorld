@@ -41,9 +41,12 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: shrinkWrap == true ? null : double.infinity,
-      child: Container(
+    return GestureDetector(
+        onTap: () {
+          onPressed();
+        },
+        child: Container(
+          width: shrinkWrap == true ? null : double.infinity,
           margin: margin ?? const EdgeInsets.fromLTRB(24, 8, 24, 8),
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
@@ -57,18 +60,13 @@ class Button extends StatelessWidget {
                     // slightly green shadow
                     color: Color(0x40000000))
               ]),
-          child: GestureDetector(
-            onTap: () {
-              onPressed();
-            },
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 24,
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
