@@ -46,9 +46,15 @@ class Button extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
           decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(8),
-          ),
+              color: color,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                    // slightly green shadow
+                    color: Color(0x40000000))
+              ]),
           child: GestureDetector(
             onTap: () {
               onPressed();
