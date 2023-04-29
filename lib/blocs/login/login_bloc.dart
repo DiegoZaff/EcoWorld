@@ -10,6 +10,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<StartLogin>(_onStartLogin);
     on<RegisterUser>(_onRegisterUser);
     on<StartLogout>(_onStartLogout);
+    on<UpdateLogin>(_onUpdateLogin);
   }
 
   Future<FutureOr<void>> _onStartLogin(
@@ -33,4 +34,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   FutureOr<void> _onStartLogout(StartLogout event, Emitter<LoginState> emit) {}
+
+  FutureOr<void> _onUpdateLogin(UpdateLogin event, Emitter<LoginState> emit) {
+    emit(LoggedIn(user: event.user));
+  }
 }

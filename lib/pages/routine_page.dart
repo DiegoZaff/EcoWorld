@@ -1,8 +1,12 @@
 import 'dart:ui';
 
+import 'package:eco_app/blocs/login/login_bloc.dart';
 import 'package:eco_app/components/domande_routine.dart';
 import 'package:eco_app/components/title_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../api/footprint.dart';
 
 class Domanda {
   double value;
@@ -47,14 +51,22 @@ class _RoutineState extends State<Routine> {
     });
   }
 
-  void punteggio(){
+  Future<void> punteggio() async {
     double punteggio = 0;
     for (int i = 0; i < domande.length; i++) {
       punteggio = punteggio + domande[i].value;
     }
-    punteggio = (punteggio*15) / (numerodomande*100);
+    punteggio = (punteggio * 15) / (numerodomande * 100);
     punti = punteggio;
+    final state = context.read<LoginBloc>().state;
+    if (state is LoggedIn) {
+      await sendCarbonFootprint(
+              punteggio.toInt(), state.user.username, state.user.password)
+          .then((newUser) =>
+              context.read<LoginBloc>().add(UpdateLogin(user: newUser)));
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,11 +98,13 @@ class _RoutineState extends State<Routine> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     GestureDetector(
-                        onLongPress: punteggio, 
+                        onLongPress: punteggio,
                         child: Padding(
                           padding: const EdgeInsets.only(right: 20, bottom: 20),
                           child: Container(
-                            decoration: BoxDecoration(color: Colors.white.withOpacity(0.7), borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(10)),
                             child: const Padding(
                               padding: EdgeInsets.all(5),
                               child: Text(
