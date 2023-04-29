@@ -7,9 +7,9 @@ class Tasks extends StatelessWidget {
       required this.title,
       required this.points,
       this.onPressed}); //da mettere il tempo
-  
+
   final String title;
-  
+
   final int points;
   final void Function()? onPressed;
 
@@ -25,7 +25,6 @@ class Tasks extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                
                 Padding(
                     padding: const EdgeInsets.only(left: 24),
                     child: Text(
@@ -36,6 +35,14 @@ class Tasks extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     )),
                 const Spacer(),
+                Container(
+                    height: 15,
+                    width: 15,
+                    child: SvgPicture.asset(points <= 5
+                        ? 'assets/icons/tree1.svg'
+                        : points <= 10
+                            ? 'assets/icons/tree2.svg'
+                            : 'assets/icons/tree3.svg')),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
