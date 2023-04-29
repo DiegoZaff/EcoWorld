@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.5
   go_router: ^7.0.0
 
 dev_dependencies:
@@ -18,3 +19,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/quiz.svg
+    - assets/icons/dailyfootprint.svg
+
