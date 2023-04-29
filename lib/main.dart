@@ -83,6 +83,7 @@ class MainApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           primaryColor: const Color(0xFF005C4C),
           scaffoldBackgroundColor: Colors.grey[100],
+          hoverColor: Colors.white.withOpacity(0.6),
           textTheme: const TextTheme(
             titleMedium: TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),

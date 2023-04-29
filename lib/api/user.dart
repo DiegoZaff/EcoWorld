@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,13 +11,15 @@ const String baseUrl =
 class User {
   final String username;
   final String password;
+  final int score; 
 
-  const User({required this.username, required this.password});
+  const User({required this.username, required this.password, required this.score});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       username: json['username'] as String,
       password: json['password'] as String,
+      score: json['score'] as int,
     );
   }
 
@@ -24,6 +27,7 @@ class User {
     return <String, dynamic>{
       'username': user.username,
       'password': user.password,
+      'score': user.score,
     };
   }
 }
@@ -66,3 +70,5 @@ Future<User> logInUser(String username, String password) async {
     return User.fromJson(jsonDecode(response.body));
   }
 }
+
+
