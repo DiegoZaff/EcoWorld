@@ -1,5 +1,5 @@
 import 'package:eco_app/blocs/login/login_bloc.dart';
-import 'package:eco_app/classes/user_leaderboard.dart';
+import 'package:eco_app/components/scaffold_nav_bar.dart';
 import 'package:eco_app/pages/home_page.dart';
 import 'package:eco_app/pages/leaderboards.dart';
 import 'package:eco_app/pages/login.dart';
@@ -24,34 +24,37 @@ void main() {
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
-      },
-    ),
+    ShellRoute(
+        builder: (context, state, child) {
+          return ScaffoldNavBar(child: child);
+        },
+        routes: [
+          GoRoute(
+            path: '/',
+            pageBuilder: (context, state) => CustomTransitionPage(
+              child: const HomePage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return child;
+              },
+            ),
+          ),
+          GoRoute(
+              path: '/leaderboards',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                    child: const Leaderboard(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return child;
+                    },
+                  )),
+        ]),
     GoRoute(
       path: '/login',
       builder: (BuildContext context, GoRouterState state) {
         return const Login();
       },
     ),
-    GoRoute(
-        path: '/leaderboards',
-        builder: (BuildContext context, GoRouterState state) {
-          return Leaderboard(
-            globalLeaderboard: [
-              UserLeaderboard(name: "Maria", points: 12414),
-              UserLeaderboard(name: "Giovanni", points: 420),
-              UserLeaderboard(name: "Diego", points: 157, isYou: true)
-            ],
-            teamLeaderboard: [
-              UserLeaderboard(name: "Giorgia", points: 1),
-              UserLeaderboard(name: "Claudio", points: 125),
-              UserLeaderboard(name: "Cesare", points: 1235)
-            ],
-          );
-        }),
     GoRoute(
       path: '/quiz',
       builder: (BuildContext context, GoRouterState state) {
