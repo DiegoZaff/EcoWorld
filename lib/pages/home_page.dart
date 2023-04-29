@@ -16,50 +16,83 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          UserInfo(
-            name: name,
-            surname: surname,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/image/sfondofoglie.png"),
+            fit: BoxFit.cover,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
-            child: Container(
-              color: Colors.grey[100],
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.description_outlined,
-                      color: Colors.blue,
-                    ),
-                    Tasks(title: 'Quizzettone', points: 15),
-                  ],
+        ),
+        child: Column(
+          children: [
+            UserInfo(
+              name: name,
+              surname: surname,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).scaffoldBackgroundColor),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.description_outlined,
+                        color: Colors.blue,
+                      ),
+                      Tasks(title: 'Quizzettone', points: 15),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
-            child: Container(
-              color: Colors.grey[100],
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.face,
-                      color: Colors.blue,
-                    ),
-                    Tasks(title: 'Daily Footprint', points: 15),
-                  ],
+      
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).scaffoldBackgroundColor),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.face,
+                        color: Colors.blue,
+                      ),
+                      Tasks(title: 'Daily Footprint', points: 5),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+      
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).scaffoldBackgroundColor),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.wb_sunny_outlined,
+                        color: Colors.blue,
+                      ),
+                      Tasks(title: 'Daily Challenge', points: 10),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
