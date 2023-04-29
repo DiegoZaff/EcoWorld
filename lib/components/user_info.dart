@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ionicons/ionicons.dart';
 
 import 'personal_score.dart';
 
 class UserInfo extends StatelessWidget {
-  const UserInfo({super.key, required this.name, required this.surname});
+  const UserInfo({
+    super.key,
+    required this.name,
+  });
 
   final String name;
-  final String surname;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,13 @@ class UserInfo extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Theme.of(context).primaryColor,
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x40000000),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,19 +36,20 @@ class UserInfo extends StatelessWidget {
             Row(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(right: 8),
                   child: Icon(
-                    Icons.person,
+                    Ionicons.person_circle,
                   ),
                 ),
                 TextButton(
                   onPressed: () {
                     context.push('/login');
                   },
-                  child: Text(
-                    '$name\n$surname',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  child: Text(name,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white)),
                 ),
                 const Spacer(),
                 const PersonalScore(

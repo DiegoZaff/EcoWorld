@@ -3,16 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../api/user.dart';
 
 class Login extends HookWidget {
   const Login({super.key});
-
-  static Route<dynamic> route() {
-    return CupertinoPageRoute<void>(builder: (_) => const Login());
-  }
-
   @override
   Widget build(BuildContext context) {
     var username = useState("");
@@ -20,13 +16,17 @@ class Login extends HookWidget {
 
     return Scaffold(
       appBar: CupertinoNavigationBar(
-        leading: CupertinoNavigationBarBackButton(
-            onPressed: () {
-              GoRouter.of(context).pop();
+        backgroundColor: const Color.fromARGB(255, 0, 191, 57),
+        leading: GestureDetector(
+            onTap: () {
+              context.pop();
             },
-            //  green kinda ecologist
-            color: const Color.fromARGB(255, 0, 191, 57)),
-        middle: const Text("Login"),
+            child: const Icon(
+              Ionicons.arrow_back_circle,
+              color: Colors.white,
+              size: 36,
+            )),
+        middle: const Text("Login", style: TextStyle(color: Colors.white)),
       ),
       body: Column(
         children: [
