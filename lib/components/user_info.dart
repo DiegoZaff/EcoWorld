@@ -31,9 +31,14 @@ class UserInfo extends StatelessWidget {
                     Icons.person,
                   ),
                 ),
-                Text(
-                  '$name\n$surname',
-                  style: Theme.of(context).textTheme.titleMedium,
+                TextButton(
+                  onPressed: () {
+                    context.push('/login');
+                  },
+                  child: Text(
+                    '$name\n$surname',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 const Spacer(),
                 const PersonalScore(

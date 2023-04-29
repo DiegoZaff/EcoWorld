@@ -1,7 +1,7 @@
 import 'package:eco_app/classes/user_leaderboard.dart';
-import 'package:eco_app/components/leaderboards/leaderboard_tile.dart';
 import 'package:eco_app/pages/home_page.dart';
 import 'package:eco_app/pages/leaderboards.dart';
+import 'package:eco_app/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +22,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/login',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
+        return const Login();
       },
     ),
     GoRoute(
