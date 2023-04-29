@@ -1,11 +1,11 @@
+import 'package:eco_app/blocs/login/login_bloc.dart';
 import 'package:eco_app/components/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-
-import '../api/user.dart';
 
 class Login extends HookWidget {
   const Login({super.key});
@@ -28,62 +28,70 @@ class Login extends HookWidget {
             )),
         middle: const Text("Login", style: TextStyle(color: Colors.white)),
       ),
-      body: Column(
-        children: [
-          Form(
-              child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "Username: ",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-                CupertinoTextField(
-                  onChanged: (value) => username.value = value.trim(),
-                ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                  child: SizedBox(
+      body: BlocListener<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state is LoggedIn) {
+            context.pop();
+          }
+        },
+        child: Column(
+          children: [
+            Form(
+                child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                children: [
+                  const SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Password: ",
+                      "Username: ",
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
-                ),
-                CupertinoTextField(
-                  obscureText: true,
-                  onChanged: (value) => password.value = value.trim(),
-                ),
+                  CupertinoTextField(
+                    onChanged: (value) => username.value = value.trim(),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        "Password: ",
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  ),
+                  CupertinoTextField(
+                    obscureText: true,
+                    onChanged: (value) => password.value = value.trim(),
+                  ),
 
-                // "Login" button
-                Button(
-                    text: 'login',
+                  // "Login" button
+                  Button(
+                      text: 'login',
+                      onPressed: () {
+                        context.read<LoginBloc>().add(StartLogin(
+                            password: password.value,
+                            username: username.value));
+                      }),
+                  // "Register" button
+                  Button(
+                    text: 'register',
+                    type: ButtonType.secondary,
                     onPressed: () {
-                      // TODO login
-                    }),
-                // "Register" button
-                Button(
-                  text: 'register',
-                  type: ButtonType.secondary,
-                  onPressed: () {
-                    if (username.value.isNotEmpty &&
-                        password.value.isNotEmpty) {
-                      try {
-                        registerUser(username.value, password.value);
-                        // ignore: empty_catches
-                      } catch (e) {}
-                    }
-                  },
-                )
-              ],
-            ),
-          ))
-        ],
+                      if (username.value.isNotEmpty &&
+                          password.value.isNotEmpty) {
+                        context.read<LoginBloc>().add(RegisterUser(
+                            password: password.value,
+                            username: username.value));
+                      }
+                    },
+                  )
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }

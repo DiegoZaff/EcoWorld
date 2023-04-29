@@ -30,9 +30,7 @@ class _HomePageState extends State<HomePage> {
           filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
           child: Column(
             children: [
-              UserInfo(
-                name: name,
-              ),
+              const UserInfo(),
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
                 child: Container(

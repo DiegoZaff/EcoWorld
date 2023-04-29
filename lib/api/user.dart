@@ -46,3 +46,23 @@ Future<User> registerUser(String username, String password) async {
     return User.fromJson(jsonDecode(response.body));
   }
 }
+
+Future<User> logInUser(String username, String password) async {
+  String body = jsonEncode({'username': username, 'password': password});
+
+  http.Response response = await http.post(Uri.http(baseUrl, '/login'),
+      body: body, headers: {'Content-Type': 'application/json'});
+
+  Map<String, dynamic> json = jsonDecode(response.body);
+
+  if (response.statusCode != 200) {
+    Fluttertoast.showToast(
+      msg: json['message'],
+      backgroundColor: const Color.fromARGB(255, 238, 37, 37),
+    );
+
+    throw Exception(json['message']);
+  } else {
+    return User.fromJson(jsonDecode(response.body));
+  }
+}

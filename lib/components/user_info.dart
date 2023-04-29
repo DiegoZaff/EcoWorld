@@ -1,16 +1,16 @@
+import 'package:eco_app/components/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../blocs/login/login_bloc.dart';
 import 'personal_score.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({
     super.key,
-    required this.name,
   });
-
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +35,42 @@ class UserInfo extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(right: 8),
-                  child: Icon(
-                    Ionicons.person_circle,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.push('/login');
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    if (state is LoggedIn) {
+                      return Expanded(
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child: Icon(
+                                Ionicons.person_circle,
+                              ),
+                            ),
+                            Text(state.user.username,
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white)),
+                            const Spacer(),
+                            const PersonalScore(
+                              score: 100,
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Button(
+                        text: "Login",
+                        onPressed: () {
+                          context.push('/login');
+                        },
+                        shrinkWrap: true,
+                        margin: const EdgeInsets.all(0),
+                      );
+                    }
                   },
-                  child: Text(name,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white)),
                 ),
-                const Spacer(),
-                const PersonalScore(
-                  score: 100,
-                )
               ],
             ),
             Padding(

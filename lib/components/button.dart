@@ -11,15 +11,17 @@ class Button extends StatelessWidget {
   final ButtonType type;
   final String text;
   final Function onPressed;
-
+  final bool? shrinkWrap;
+  final EdgeInsetsGeometry? margin;
   late Color color;
 
-  Button({
-    super.key,
-    this.type = ButtonType.primary,
-    required this.text,
-    required this.onPressed,
-  }) {
+  Button(
+      {super.key,
+      this.type = ButtonType.primary,
+      required this.text,
+      required this.onPressed,
+      this.shrinkWrap,
+      this.margin}) {
     switch (type) {
       case ButtonType.primary:
         color = const Color.fromARGB(255, 0, 191, 57);
@@ -39,10 +41,13 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-          margin: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+    return GestureDetector(
+        onTap: () {
+          onPressed();
+        },
+        child: Container(
+          width: shrinkWrap == true ? null : double.infinity,
+          margin: margin ?? const EdgeInsets.fromLTRB(24, 8, 24, 8),
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
           decoration: BoxDecoration(
@@ -55,18 +60,13 @@ class Button extends StatelessWidget {
                     // slightly green shadow
                     color: Color(0x40000000))
               ]),
-          child: GestureDetector(
-            onTap: () {
-              onPressed();
-            },
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 24,
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

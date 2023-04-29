@@ -1,15 +1,24 @@
+import 'package:eco_app/blocs/login/login_bloc.dart';
 import 'package:eco_app/classes/user_leaderboard.dart';
 import 'package:eco_app/pages/home_page.dart';
 import 'package:eco_app/pages/leaderboards.dart';
 import 'package:eco_app/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/quiz_page.dart';
 import 'pages/routine_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => LoginBloc(),
+      ),
+    ],
+    child: const MainApp(),
+  ));
 }
 
 final GoRouter _router = GoRouter(
