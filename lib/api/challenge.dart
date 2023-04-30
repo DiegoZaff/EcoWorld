@@ -31,22 +31,30 @@ class DailyChallenge {
 }
 
 Future<List<DailyChallenge>> getChallenges() async {
-  http.Response response = await http.get(
-      Uri.http(baseUrl, '/game/list_challenges'),
-      headers: {'Content-Type': 'application/json'});
+  try {
+    http.Response response = await http.get(
+        Uri.http(baseUrl, '/game/list_challenges'),
+        headers: {'Content-Type': 'application/json'});
 
-  final json = jsonDecode(response.body);
+    final json = jsonDecode(response.body);
 
-  if (response.statusCode != 200) {
+    if (response.statusCode != 200) {
+      Fluttertoast.showToast(
+        msg: json['message'],
+        backgroundColor: const Color.fromARGB(255, 238, 37, 37),
+      );
+
+      throw Exception(json['message']);
+    } else {
+      final json = jsonDecode(response.body) as List<dynamic>;
+      return json.map((e) => DailyChallenge.fromJson(e)).toList();
+    }
+  } catch (e) {
     Fluttertoast.showToast(
-      msg: json['message'],
+      msg: e.toString(),
       backgroundColor: const Color.fromARGB(255, 238, 37, 37),
     );
-
-    throw Exception(json['message']);
-  } else {
-    final json = jsonDecode(response.body) as List<dynamic>;
-    return json.map((e) => DailyChallenge.fromJson(e)).toList();
+    return [];
   }
 }
 

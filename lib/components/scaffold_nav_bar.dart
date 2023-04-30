@@ -34,7 +34,7 @@ class ScaffoldNavBar extends HookWidget {
               context.go('/');
               break;
             case 1:
-              context.push('/login');
+              context.push('/my_world');
               break;
             case 2:
               context.go('/leaderboards');

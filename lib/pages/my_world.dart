@@ -1,22 +1,8 @@
 import 'dart:convert';
-
+import 'dart:ui';
+import 'package:eco_app/components/my_world/achievement_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class Achievement {
-  final String description;
-  final String title;
-
-  Achievement({required this.description, required this.title});
-
-  Map<String, dynamic> toJson() => {
-        'description': description,
-        'title': title,
-      };
-  Achievement.fromJson(Map<String, dynamic> json)
-      : description = json['nome'],
-        title = json['isDeleted'];
-}
 
 class MyWorld extends StatefulWidget {
   const MyWorld({super.key});
@@ -30,9 +16,12 @@ class _MyWorldState extends State<MyWorld> {
 
   List<Achievement> achievements = [];
 
-  void loadAchievements() {
-    _prefs.then((SharedPreferences prefs) {
+  Future<void> loadAchievements() async {
+    try {
+      final prefs = await _prefs;
+
       String? stringa = prefs.getString('achievements');
+
       if (stringa != null) {
         List<dynamic> jsonList = jsonDecode(stringa);
 
@@ -42,19 +31,20 @@ class _MyWorldState extends State<MyWorld> {
           achievements = newAchivevements;
         });
       }
-    });
+    } catch (e) {
+      print(e);
+    }
   }
 
-  void savedTodos(List<Achievement> achievements) {
+  void saveAchievements(List<Achievement> achievements) {
     final json = jsonEncode(achievements.map((e) => e.toJson()).toList());
     _prefs.then((prefs) => prefs.setString('achievements', json));
   }
 
   void addAchievement() {
     setState(() {
-      achievements.add(Achievement(
-          description: 'aggiungi descrizione', title: 'aggiungi un titolo'));
-      savedTodos(achievements);
+      achievements.add(Achievement());
+      saveAchievements(achievements);
     });
   }
 
@@ -68,36 +58,41 @@ class _MyWorldState extends State<MyWorld> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          
           onPressed: addAchievement,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.add),
         ),
         body: Container(
-          child: ListView.builder(
-            itemCount: achievements.length,
-            itemBuilder: (context, index) {
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/sfondofoglie.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+            child: SafeArea(
+              child: Column(children: [
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'My World',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: Text(achievements[index].description),
-                      ),
-                    ),
-                  )
-                ],
-              );
-            },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: achievements.length,
+                    itemBuilder: (context, index) {
+                      return AchievementTile(achievement: achievements[index]);
+                    },
+                  ),
+                ),
+              ]),
+            ),
           ),
         ));
   }
