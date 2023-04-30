@@ -3,6 +3,7 @@ import 'package:eco_app/components/scaffold_nav_bar.dart';
 import 'package:eco_app/pages/home_page.dart';
 import 'package:eco_app/pages/leaderboards.dart';
 import 'package:eco_app/pages/login.dart';
+import 'package:eco_app/pages/my_world.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -65,6 +66,12 @@ final GoRouter _router = GoRouter(
       path: '/routine',
       builder: (BuildContext context, GoRouterState state) {
         return const Routine();
+      },
+    ),
+    GoRoute(
+      path: '/my_world',
+      builder: (BuildContext context, GoRouterState state) {
+        return MyWorld();
       },
     ),
   ],

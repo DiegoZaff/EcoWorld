@@ -53,7 +53,7 @@ class UserInfo extends StatelessWidget {
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white)),
                             const Spacer(),
-                             PersonalScore(
+                            PersonalScore(
                               score: state.user.score,
                             )
                           ],
@@ -80,7 +80,7 @@ class UserInfo extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      context.go("/myworld");
+                      context.push("/my_world");
                     },
                     child: Row(children: [
                       Image.asset("assets/images/earth.png"),
