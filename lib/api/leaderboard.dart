@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:eco_app/api/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+
+import 'baseurl.dart';
 
 class UserLeaderboard {
   final String username;

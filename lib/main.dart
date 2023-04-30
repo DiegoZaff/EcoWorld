@@ -59,7 +59,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/quiz',
       builder: (BuildContext context, GoRouterState state) {
-        return const Quiz();
+        return const QuizPage();
       },
     ),
     GoRoute(

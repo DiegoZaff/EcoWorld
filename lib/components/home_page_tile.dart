@@ -4,11 +4,14 @@ import 'package:ionicons/ionicons.dart';
 import 'tasks.dart';
 
 class HomePageTile extends StatelessWidget {
+  final int points;
+
   const HomePageTile(
       {super.key,
       this.onPress,
       required this.title,
       this.icon = Ionicons.sunny,
+      this.points = 10,
       this.isCompleted});
 
   final VoidCallback? onPress;
@@ -40,7 +43,7 @@ class HomePageTile extends StatelessWidget {
                   icon,
                   color: const Color.fromARGB(255, 0, 191, 57),
                 ),
-                Tasks(title: title, points: 10, isCompleted: isCompleted),
+                Tasks(title: title, points: points, isCompleted: isCompleted),
               ],
             ),
           ),

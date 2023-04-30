@@ -153,9 +153,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const UserInfo(),
-              const HomePageTile(
-                title: "Quizzettone",
+              HomePageTile(
+                title: "Quiz",
                 icon: Ionicons.help_circle,
+                onPress: () => {context.push('/quiz')},
               ),
               HomePageTile(
                 title: "Daily Footprint",
@@ -169,6 +170,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return HomePageTile(
                     isCompleted: challenges[index].isCompleted,
+                    points: challenges[index].points,
                     title: "Daily Challenge",
                     onPress: () => _showModal(context, challenges[index]),
                   );
