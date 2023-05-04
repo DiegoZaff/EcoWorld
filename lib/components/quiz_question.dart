@@ -29,7 +29,7 @@ class QuizQuestion extends HookWidget {
                   // slightly green shadow
                   color: Color(0x40000000))
             ]),
-        child: Column(children: [
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(
             question.question,
             style: const TextStyle(
@@ -37,7 +37,6 @@ class QuizQuestion extends HookWidget {
               fontSize: 16,
             ),
           ),
-          const Spacer(),
           // map over the answers with radio buttons
           for (var answer in question.answers)
             Row(
@@ -49,11 +48,13 @@ class QuizQuestion extends HookWidget {
                     selectedAnswer.value = value as String;
                   },
                 ),
-                Text(
-                  answer,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    answer,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],

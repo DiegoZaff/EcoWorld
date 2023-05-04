@@ -23,6 +23,7 @@ class QuizPage extends HookWidget {
 
     useEffect(() {
       getQuiz().then((value) => quiz.value = value);
+
       return null;
     }, [state]);
 
@@ -42,25 +43,27 @@ class QuizPage extends HookWidget {
                 context.pop();
               }
             },
-            child: Column(children: [
-              const Text('Quiz', style: TextStyle(fontSize: 30)),
-              Expanded(
-                  child: (quiz.value != null)
-                      ? ListView.builder(
-                          itemBuilder: (context, i) {
-                            return QuizQuestion(
-                                question: quiz.value![i],
-                                onChanged: (value) {
-                                  answers.value[i] = Answer(
-                                      question: quiz.value![i].id,
-                                      answer: value);
-                                });
-                          },
-                          itemCount: quiz.value!.length,
-                        )
-                      : const Center(
-                          child: CircularProgressIndicator.adaptive())),
-            ]),
+            child: SafeArea(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                const Text('Quiz', style: TextStyle(fontSize: 30)),
+                Expanded(
+                    child: (quiz.value != null)
+                        ? ListView.builder(
+                            itemBuilder: (context, i) {
+                              return QuizQuestion(
+                                  question: quiz.value![i],
+                                  onChanged: (value) {
+                                    answers.value[i] = Answer(
+                                        question: quiz.value![i].id,
+                                        answer: value);
+                                  });
+                            },
+                            itemCount: quiz.value?.length,
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator.adaptive())),
+              ]),
+            ),
           ),
         ),
       ),
