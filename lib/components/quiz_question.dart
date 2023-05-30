@@ -20,7 +20,7 @@ class QuizQuestion extends HookWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 105, 121, 111),
+            color: Color(0xFF69796F),
             borderRadius: BorderRadius.circular(8),
             boxShadow: const [
               BoxShadow(

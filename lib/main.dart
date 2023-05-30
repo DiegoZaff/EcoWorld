@@ -71,7 +71,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/my_world',
       builder: (BuildContext context, GoRouterState state) {
-        return MyWorld();
+        return const MyWorld();
       },
     ),
   ],
@@ -83,6 +83,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
       theme: ThemeData(
           iconTheme: const IconThemeData(color: Colors.white, size: 30),

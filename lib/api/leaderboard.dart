@@ -35,11 +35,6 @@ Future<Leaderboard> fetchLeaderboard(String authstring) async {
     final json = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
-      Fluttertoast.showToast(
-        msg: json['message'],
-        backgroundColor: const Color.fromARGB(255, 238, 37, 37),
-      );
-
       throw Exception(json['message']);
     } else {
       final List<dynamic> json = jsonDecode(response.body);

@@ -12,6 +12,7 @@ class ScaffoldNavBar extends HookWidget {
   Widget build(BuildContext context) {
     final selectedIndex = useState(0);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: child,
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: selectedIndex.value,

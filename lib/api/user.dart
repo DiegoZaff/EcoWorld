@@ -69,3 +69,22 @@ Future<User> logInUser(String username, String password) async {
     return User.fromJson(jsonDecode(response.body));
   }
 }
+
+/* Future<void> mockRequest(String authstring) async {
+  http.Response response = await http
+      .get(Uri.http(baseUrl, '/'), headers: {'Authorization': authstring});
+
+  final json = jsonDecode(response.body);
+
+  if (response.statusCode != 200) {
+    Fluttertoast.showToast(
+      msg: json['message'],
+      backgroundColor: const Color.fromARGB(255, 238, 37, 37),
+    );
+  } else {
+    Fluttertoast.showToast(
+      msg: json['message'],
+      backgroundColor: Color.fromARGB(255, 37, 238, 47),
+    );
+  }
+} */

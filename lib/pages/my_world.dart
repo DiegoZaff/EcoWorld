@@ -57,6 +57,7 @@ class _MyWorldState extends State<MyWorld> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         floatingActionButton: FloatingActionButton(
           onPressed: addAchievement,
           backgroundColor: Theme.of(context).primaryColor,
